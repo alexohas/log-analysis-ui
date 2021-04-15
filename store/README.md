@@ -1,5 +1,5 @@
 # Running in development
-git clone
+git clone to local system
 cd into folder
 npm install
 npm run dev
