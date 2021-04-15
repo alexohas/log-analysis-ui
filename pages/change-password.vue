@@ -4,14 +4,10 @@
     style="height: 100vh"
   >
     <div class="col-12 col-md-4" style="height: 70vh;">
-      <h2>
-        Natural Language Processing Applied to system log analysis with emphasis
-        on Apache Server Log files
-      </h2>
       <form @submit.prevent="submitLogin" class="px-5 card py-5">
         <div class="text-center mt-3">
           <h4>Welcome Back</h4>
-          <h6>Enter your credentials to gain access</h6>
+          <h6>Enter your username and your new preferred password</h6>
         </div>
         <div class="form-group">
           <label for="">Username</label>
@@ -35,7 +31,6 @@
         <div class="form-group">
           <b-button type="submit" variant="outline-success">Submit</b-button>
         </div>
-        <nuxt-link to="/change-password">Reset Password</nuxt-link>
       </form>
     </div>
   </div>
@@ -53,21 +48,17 @@ export default {
       }
     };
   },
-  mounted() {
-    this.logUserOut();
-  },
   methods: {
-    ...mapActions("auth", ["loginFn"]),
-    ...mapMutations("auth", ["logUserOut"]),
+    ...mapActions("auth", ["resetPasswordFn"]),
     submitLogin: async function() {
       try {
-        let response = await this.loginFn(this.login);
+        let response = await this.resetPasswordFn(this.login);
         this.$bvToast.toast(response.message, {
           title: "Completed",
           autoHideDelay: 5000,
           appendToast: true
         });
-        this.$router.push("/dashboard?tab=search");
+        this.$router.push("/");
       } catch (error) {
         this.$bvToast.toast(error.message, {
           title: "Request Failed",
